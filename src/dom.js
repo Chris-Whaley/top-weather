@@ -15,10 +15,13 @@ export default function populateDOM(data) {
 
   dayOfWeek.textContent = format(dayDate, "EEE");
   dayConditions.textContent = conditions;
-  dayHi.textContent = Hi;
-  dayLo.textContent = Lo;
+  dayHi.textContent = Math.round(Hi);
+  dayLo.textContent = Math.round(Lo);
 
   iconFile = retrieveIcon(icon);
+  // console.log(iconDay);
+  // console.log(iconFile);
   // iconDay.setAttribute("src", `./img/${iconFile}`);
-  iconDay.src = `./img/${iconFile}`;
+  // iconDay.src = `./img/${iconFile}`;
+  iconDay.src = iconFile;
 }
