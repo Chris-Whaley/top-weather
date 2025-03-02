@@ -6,8 +6,14 @@ const weatherIcons = {
   fog: "Fog.gif",
   wind: "Windy.gif",
   cloudy: "Cloudy.gif",
-  "partly-cloudy-day": "Partly-Cloudy.gif",
-  "partly-cloudy-night": "Partly-Clear.gif",
-  "clear-day": "Sunny.gif",
-  "clear-night": "Clear.gif",
+  partly_cloudy_day: "Partly-Cloudy.gif",
+  partly_cloudy_night: "Partly-Clear.gif",
+  clear_day: "Sunny.gif",
+  clear_night: "Clear.gif",
 };
+
+export default function retrieveIcon(weatherType) {
+  const formattedIcon = weatherType.replaceAll("-", "_");
+
+  return weatherIcons[formattedIcon];
+}
