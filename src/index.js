@@ -1,5 +1,7 @@
 import "./style.css";
 
+import populateDOM from "./dom.js";
+
 const today = document.querySelector("#day-0");
 const tomorrow = document.querySelector("#day-1");
 const dayAfterTomorrow = document.querySelector("#day-2");
@@ -13,9 +15,8 @@ async function getWeather(location) {
   );
 
   const weather = await response.json();
-  console.log(weather);
 
-  for (let index = 0; index < 3; index++) {
+  for (let index = 0; index <= 4; index++) {
     const dayData = {
       dayNumber: index,
       dayDate: weather.days[index].datetime,
@@ -25,12 +26,15 @@ async function getWeather(location) {
       Lo: weather.days[index].tempmin,
     };
     daysData.push(dayData);
-    console.log(daysData);
   }
 
-  today.textContent = weather.days[0].conditions;
-  tomorrow.textContent = weather.days[1].conditions;
-  dayAfterTomorrow.textContent = weather.days[2].conditions;
+  daysData.forEach((element) => {
+    populateDOM(element);
+  });
 }
 
 getWeather(location);
+
+if (process.env.NODE_ENV !== "production") {
+  console.log("Looks like we are in development mode!");
+}
