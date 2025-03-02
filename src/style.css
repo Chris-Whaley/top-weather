@@ -1,24 +1,23 @@
 @font-face {
   font-family: "Star4000";
-  src: url("./fonts/Star4000.ttf") format("ttf");
+  src: url("./fonts/Star4000.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 body {
-  max-width: 80%;
+  /* max-width: 80%;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
   background: linear-gradient(#053462, #bb7224);
   font-family: "Star4000";
   text-shadow: 1px 1px 1px black;
 }
 .days-container {
-  height: 80vh;
+  /* height: 75vh; */
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
-  border: 2px solid black;
 }
 
 .day {
@@ -27,21 +26,26 @@ body {
   flex: 1 0 auto;
   display: grid;
   grid-template-rows: 1fr 2fr 1fr 2fr;
+  padding: 4px;
 }
 
-.day > img {
-  height: 50px;
-  width: 50px;
+.day-icon {
+  height: 100px;
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .day-name {
   text-align: center;
   color: yellow;
+  font-size: 3rem;
 }
 
 .day-conditions {
   text-align: center;
   color: white;
+  font-size: 3rem;
 }
 
 .temp-containers {
@@ -55,6 +59,7 @@ body {
 .low-container {
   display: grid;
   grid-template-rows: 1fr 1fr;
+  font-size: 2rem;
 }
 
 .high-container > p:first-child,
