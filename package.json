@@ -1,5 +1,5 @@
 {
-  "name": "template-webpack",
+  "name": "The Odin Project Weather App",
   "version": "1.0.0",
   "description": "Template for projects using webpack",
   "private": true,
