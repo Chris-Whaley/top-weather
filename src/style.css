@@ -5,27 +5,79 @@
   font-style: normal;
 }
 
-body {
-  /* max-width: 80%;
-  margin-left: auto;
-  margin-right: auto; */
+.all-container {
+  box-sizing: content-box;
   background: linear-gradient(#053462, #bb7224);
   font-family: "Star4000";
   text-shadow: 1px 1px 1px black;
 }
+
+/*  Header  */
+.header {
+  box-sizing: content-box;
+  max-height: 25vh;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 3fr 2fr;
+  background: linear-gradient(#ec861d, #5b2128);
+  grid-template-areas: ". image location . date";
+  color: white;
+  font-size: 1.5rem;
+}
+
+.header > img {
+  grid-area: image;
+  box-sizing: content-box;
+}
+
+.location {
+  grid-area: location;
+  display: grid;
+  margin-left: 1rem;
+}
+
+#city-name {
+  cursor: pointer;
+}
+
+.forecast-date {
+  grid-area: date;
+  display: grid;
+}
+
+/* Main Content */
 .days-container {
-  /* height: 75vh; */
+  box-sizing: content-box;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
+  grid-template-areas: "day0 day1 day2 day3 day4";
+}
+
+#day-0 {
+  grid-area: day0;
+}
+
+#day-1 {
+  grid-area: day1;
+}
+
+#day-2 {
+  grid-area: day2;
+}
+
+#day-3 {
+  grid-area: day3;
+}
+
+#day4 {
+  grid-area: day4;
 }
 
 .day {
   background: linear-gradient(#49b7f4, #034159);
   border: 4px solid white;
-  flex: 1 0 auto;
   display: grid;
-  grid-template-rows: 1fr 2fr 1fr 2fr;
+  grid-template-rows: repeat(4, 1fr);
   padding: 4px;
 }
 
@@ -39,13 +91,13 @@ body {
 .day-name {
   text-align: center;
   color: yellow;
-  font-size: 3rem;
+  /* font-size: 4rem; */
 }
 
 .day-conditions {
   text-align: center;
   color: white;
-  font-size: 3rem;
+  /* font-size: 3rem; */
 }
 
 .temp-containers {
@@ -59,7 +111,7 @@ body {
 .low-container {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  font-size: 2rem;
+  font-size: 32px;
 }
 
 .high-container > p:first-child,
@@ -70,4 +122,14 @@ body {
 .high-container > p:nth-child(2),
 .low-container > p:nth-child(2) {
   color: white;
+}
+
+/*  Footer */
+.footer {
+  box-sizing: content-box;
+  max-height: 20vh;
+  display: flex;
+  justify-content: flex-start;
+  color: white;
+  gap: 3rem;
 }
