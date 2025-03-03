@@ -1,6 +1,6 @@
 import "./style.css";
 
-import populateDOM from "./dom.js";
+import { populateDays, updateHeader } from "./dom.js";
 
 const today = document.querySelector("#day-0");
 const tomorrow = document.querySelector("#day-1");
@@ -29,8 +29,10 @@ async function getWeather(location) {
   }
 
   daysData.forEach((element) => {
-    populateDOM(element);
+    populateDays(element);
   });
+
+  updateHeader(daysData[0].dayDate);
 }
 
 getWeather(location);
