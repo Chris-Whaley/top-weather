@@ -6,6 +6,7 @@
 }
 
 .all-container {
+  max-height: 98vh;
   box-sizing: border-box;
   background: linear-gradient(#053462, #bb7224);
   font-family: "Star4000";
@@ -135,25 +136,24 @@
 .low-container {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  font-size: 32px;
+  /* font-size: 32px; */
 }
 
 .high-container > p:first-child,
 .low-container > p:first-child {
   color: yellow;
+  font-size: 32px;
 }
 
 .high-container > p:nth-child(2),
 .low-container > p:nth-child(2) {
   color: white;
+  font-size: 32px;
 }
 
 /*  Footer */
 .footer {
   box-sizing: border-box;
-  /* max-height: 20vh; */
-  /* display: flex;
-  justify-content: flex-start; */
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-areas: ". time location . icon temp conditions wind feels .";
@@ -195,4 +195,76 @@
 
 #footer-feels {
   grid-area: feels;
+}
+
+/* Search Modal */
+/* The overlay effect with black background */
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.9
+  ); /* Black with a little bit see-through */
+}
+
+/* The content */
+.overlay-content {
+  position: relative;
+  top: 46%;
+  width: 80%;
+  text-align: center;
+  margin-top: 30px;
+  margin: auto;
+}
+
+/* Close button */
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+  color: white;
+}
+
+.overlay .closebtn:hover {
+  color: #ccc;
+}
+
+/* Style the search field */
+.overlay input[type="text"] {
+  padding: 15px;
+  font-size: 17px;
+  border: none;
+  float: left;
+  width: 80%;
+  background: white;
+}
+
+.overlay input[type="text"]:hover {
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+.overlay button {
+  float: left;
+  width: 20%;
+  padding: 15px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay button:hover {
+  background: #bbb;
 }
