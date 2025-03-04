@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import retrieveIcon from "./weather-icons";
-import { getWeather } from "./index.js";
+import { getLocalWeather } from "./weather.js";
 
 function populateDays(data) {
   const { dayNumber, dayDate, icon, conditions, Hi, Lo } = data;
@@ -51,7 +51,7 @@ const listeners = (function (params) {
     event.preventDefault();
     const searchData = searchInput.value;
     closeModal();
-    getWeather(searchData);
+    getLocalWeather(searchData);
   });
 
   // close and reset search
