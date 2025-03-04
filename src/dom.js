@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import retrieveIcon from "./weather-icons";
+import { getWeather } from "./index.js";
 
 function populateDays(data) {
   const { dayNumber, dayDate, icon, conditions, Hi, Lo } = data;
@@ -21,12 +22,47 @@ function populateDays(data) {
   dayLo.textContent = Math.round(Lo);
 }
 
-function updateHeader(todaysDateTime) {
+function updateHeader(todaysDateTime, location) {
   const todaysDay = document.querySelector("#day-of-week");
   const todaysDate = document.querySelector("#date");
+  const forecastLocation = document.querySelector("#city-name");
+
+  forecastLocation.textContent = location;
 
   todaysDay.textContent = format(todaysDateTime, "EEEE");
   todaysDate.textContent = format(todaysDateTime, "LLL M, yyyy");
 }
 
-export { populateDays, updateHeader };
+// function updateFooter(data) {}
+
+const listeners = (function (params) {
+  const locationSearch = document.querySelector("#city-name");
+  const closeButton = document.querySelector(".closebtn");
+  const searchInput = document.querySelector('.overlay input[type="text"]');
+  const searchModal = document.querySelector(".overlay-content > form");
+
+  // open search
+  locationSearch.addEventListener("click", () => {
+    document.getElementById("myOverlay").style.display = "block";
+  });
+
+  // capture location search
+  searchModal.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const searchData = searchInput.value;
+    closeModal();
+    getWeather(searchData);
+  });
+
+  // close and reset search
+  closeButton.addEventListener("click", () => {
+    closeModal();
+  });
+
+  function closeModal() {
+    searchModal.reset();
+    document.getElementById("myOverlay").style.display = "none";
+  }
+})();
+
+export { populateDays, updateHeader, listeners };
