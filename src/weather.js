@@ -1,4 +1,4 @@
-import { populateDays, updateHeader } from "./dom.js";
+import { populateDays, updateHeader, updateFooter } from "./dom.js";
 import { footerCities } from "./weather-lookup.js";
 
 async function getLocalWeather(location) {
@@ -64,7 +64,7 @@ async function getNationalWeather() {
     nationalData.push(cityData);
   }
 
-  return nationalData;
+  updateFooter(nationalData);
 }
 
 async function fetchWeather(location) {

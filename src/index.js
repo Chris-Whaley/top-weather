@@ -1,6 +1,5 @@
 import "./style.css";
 import { getLocalWeather, getNationalWeather } from "./weather.js";
-import { populateDays, updateHeader } from "./dom.js";
 
 getLocalWeather();
 getNationalWeather();

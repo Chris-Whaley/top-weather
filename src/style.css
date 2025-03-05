@@ -5,12 +5,18 @@
   font-style: normal;
 }
 
+body {
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .all-container {
   max-height: 98vh;
   box-sizing: border-box;
   background: linear-gradient(#053462, #bb7224);
   font-family: "Star4000";
-  text-shadow: 1px 1px 1px black;
+  text-shadow: 4px 4px 4px black;
   display: grid;
   grid-template-rows: 2fr 6fr 1fr;
   grid-template-areas:
@@ -104,6 +110,7 @@
   flex-direction: column; */
   /* justify-content: stretch; */
   padding: 4px;
+  box-sizing: border-box;
 }
 
 .day-icon {
@@ -130,12 +137,14 @@
   grid-template-columns: 1fr 1fr;
   width: 100%;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .high-container,
 .low-container {
   display: grid;
   grid-template-rows: 1fr 1fr;
+  box-sizing: border-box;
   /* font-size: 32px; */
 }
 
@@ -143,12 +152,14 @@
 .low-container > p:first-child {
   color: yellow;
   font-size: 32px;
+  box-sizing: border-box;
 }
 
 .high-container > p:nth-child(2),
 .low-container > p:nth-child(2) {
   color: white;
   font-size: 32px;
+  box-sizing: border-box;
 }
 
 /*  Footer */

@@ -33,7 +33,37 @@ function updateHeader(todaysDateTime, location) {
   todaysDate.textContent = format(todaysDateTime, "LLL M, yyyy");
 }
 
-// function updateFooter(data) {}
+function updateFooter(data) {
+  const footerTime = document.querySelector("#footer-time");
+  const footerLocation = document.querySelector("#footer-location");
+  const footerTemp = document.querySelector("#footer-temp");
+  const footerConditions = document.querySelector("#footer-conditions");
+  const footerWind = document.querySelector("#footer-wind");
+  const footerFeels = document.querySelector("#footer-feels");
+  let counter = 0;
+  let maxCounter = data.length;
+
+  function cityData(data) {
+    for (let index = 0; index < maxCounter; index++) {
+      // if (index == maxCounter) {
+      //   index = 0
+      // }
+      const city = data[index];
+      footerTime.textContent = format(city.days[0].datetime, "h:00aaaaa");
+      footerLocation.textContent = city.address;
+      footerTemp.textContent = Math.round(city.days[0].temp);
+      footerConditions.textContent = city.days[0].conditions;
+      footerWind.textContent = city.days[0].winddir;
+      footerWind.textContent += " " + Math.round(city.days[0].windspeed);
+      footerFeels.textContent = Math.round(city.days[0].feelslike);
+      console.log(city);
+    }
+  }
+  cityData(data);
+  // setTimeout(() => {
+  //   cityData(data);
+  // }, secondsToMilliseconds(5));
+}
 
 const listeners = (function (params) {
   const locationSearch = document.querySelector("#city-name");
@@ -65,4 +95,4 @@ const listeners = (function (params) {
   }
 })();
 
-export { populateDays, updateHeader, listeners };
+export { populateDays, updateHeader, updateFooter, listeners };
