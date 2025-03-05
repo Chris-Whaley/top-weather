@@ -1,5 +1,5 @@
 import "./style.css";
-import { getLocalWeather } from "./weather.js";
+import { getLocalWeather, getNationalWeather } from "./weather.js";
 import { populateDays, updateHeader } from "./dom.js";
 
 // const location = "Ipswich ma";
@@ -53,6 +53,7 @@ import { populateDays, updateHeader } from "./dom.js";
 // }
 
 getLocalWeather();
+getNationalWeather();
 
 if (process.env.NODE_ENV !== "production") {
   console.log("Looks like we are in development mode!");

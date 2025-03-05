@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import retrieveIcon from "./weather-icons";
+import { retrieveIcon } from "./weather-lookup.js";
 import { getLocalWeather } from "./weather.js";
 
 function populateDays(data) {

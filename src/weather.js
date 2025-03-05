@@ -1,4 +1,5 @@
 import { populateDays, updateHeader } from "./dom.js";
+import { footerCities } from "./weather-lookup.js";
 
 async function getLocalWeather(location) {
   let locationInput;
@@ -14,17 +15,25 @@ async function getLocalWeather(location) {
   }
 
   try {
-    response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${locationInput}?unitGroup=us&key=PDVFP546BCMAPU7PB3QD3GW5Q&contentType=json`,
-      { mode: "cors" }
-    );
-    weather = await response.json();
-    console.log(weather);
+    weather = await fetchWeather(locationInput);
     loadDailyWeather(weather);
     populateHeader(weather);
   } catch (error) {
-    alert("Location not found. Please search again");
+    // alert("error in get local weather");
   }
+
+  //   try {
+  //     response = await fetch(
+  //       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${locationInput}?unitGroup=us&key=PDVFP546BCMAPU7PB3QD3GW5Q&contentType=json`,
+  //       { mode: "cors" }
+  //     );
+  //     weather = await response.json();
+  //     console.log(weather);
+  //     loadDailyWeather(weather);
+  //     populateHeader(weather);
+  //   } catch (error) {
+  //     alert("Location not found. Please search again");
+  //   }
 
   function loadDailyWeather(data) {
     for (let index = 0; index <= 4; index++) {
@@ -50,6 +59,8 @@ async function getLocalWeather(location) {
     locationFormatted = data.resolvedAddress.split(",", 1)[0];
     updateHeader(data.days[0].datetime, locationFormatted);
   }
+
+  //   getNationalWeather();
   // Populate header
   // locationFormatted = weather.resolvedAddress.split(",", 1)[0];
   // updateHeader(daysData[0].dayDate, locationFormatted);
@@ -67,4 +78,32 @@ async function getLocalWeather(location) {
 // wind
 // feels like temp
 
-export { getLocalWeather };
+async function getNationalWeather() {
+  const locations = footerCities;
+  let cityData;
+  let nationalData = [];
+
+  for (const city of footerCities) {
+    cityData = await fetchWeather(city);
+    nationalData.push(cityData);
+  }
+
+  return nationalData;
+}
+
+async function fetchWeather(location) {
+  let response;
+  let weather;
+  try {
+    response = await fetch(
+      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=us&key=PDVFP546BCMAPU7PB3QD3GW5Q&contentType=json`,
+      { mode: "cors" }
+    );
+    weather = await response.json();
+    return weather;
+  } catch (error) {
+    alert("Location not found. Please search again");
+  }
+}
+
+export { getLocalWeather, getNationalWeather };

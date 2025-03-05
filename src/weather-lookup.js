@@ -22,8 +22,37 @@ const weatherIcons = {
   clear_night: clear_night,
 };
 
-export default function retrieveIcon(weatherType) {
+function retrieveIcon(weatherType) {
   const formattedIcon = weatherType.replaceAll("-", "_");
 
   return weatherIcons[formattedIcon];
 }
+
+const footerCities = [
+  "Atlanta, GA",
+  "Boston, MA",
+  "Chicago, IL",
+  "Cleveland, OH",
+  "Dallas, TX",
+  "Denver, CO",
+  "Detroit, MI",
+  "Houston, TX",
+  "Indianapolis, IN",
+  "Los Angeles, CA",
+  "Miami, FL",
+  "Minneapolis, MN",
+  "New York, NY",
+  "Norfolk, VA",
+  "Orlando, FL",
+  "Philadelphia, PA",
+  "Phoenix, AZ",
+  "Pittsburgh, PA",
+  "St. Louis, MO",
+  "San Francisco, CA",
+  "Seattle, WA",
+  "Syracuse, NY",
+  "Tampa, FL",
+  "Washington, D.C.",
+];
+
+export { retrieveIcon, footerCities };
