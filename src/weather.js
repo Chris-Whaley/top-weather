@@ -18,8 +18,10 @@ async function getLocalWeather(location) {
     weather = await fetchWeather(locationInput);
     loadDailyWeather(weather);
     populateHeader(weather);
+    populateFooter(weather);
   } catch (error) {
     // alert("error in get local weather");
+    console.error(error);
   }
 
   function loadDailyWeather(data) {
@@ -43,16 +45,14 @@ async function getLocalWeather(location) {
     locationFormatted = data.resolvedAddress.split(",", 1)[0];
     updateHeader(data.days[0].datetime, locationFormatted);
   }
-}
 
-// async function to pull in data for list of cities
-// need:
-// datetime
-// location (city, state from resolved address)
-// temp
-// conditions
-// wind
-// feels like temp
+  function populateFooter(data) {
+    locationFormatted = data.resolvedAddress.split(",", 2)[0];
+    console.log(locationFormatted);
+    console.log(data.days[0]);
+    updateFooter(data.days[0].datetime, locationFormatted);
+  }
+}
 
 async function getNationalWeather() {
   const locations = footerCities;

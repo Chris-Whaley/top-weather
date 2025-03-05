@@ -33,6 +33,38 @@ function updateHeader(todaysDateTime, location) {
   todaysDate.textContent = format(todaysDateTime, "LLL M, yyyy");
 }
 
+// function updateFooter(data) {
+//   const footerTime = document.querySelector("#footer-time");
+//   const footerLocation = document.querySelector("#footer-location");
+//   const footerTemp = document.querySelector("#footer-temp");
+//   const footerConditions = document.querySelector("#footer-conditions");
+//   const footerWind = document.querySelector("#footer-wind");
+//   const footerFeels = document.querySelector("#footer-feels");
+//   let counter = 0;
+//   let maxCounter = data.length;
+
+//   function cityData(data) {
+//     for (let index = 0; index < maxCounter; index++) {
+//       // if (index == maxCounter) {
+//       //   index = 0
+//       // }
+//       const city = data[index];
+//       footerTime.textContent = format(city.days[0].datetime, "h:00aaaaa");
+//       footerLocation.textContent = city.address;
+//       footerTemp.textContent = Math.round(city.days[0].temp);
+//       footerConditions.textContent = city.days[0].conditions;
+//       footerWind.textContent = city.days[0].winddir;
+//       footerWind.textContent += " " + Math.round(city.days[0].windspeed);
+//       footerFeels.textContent = Math.round(city.days[0].feelslike);
+//       console.log(city);
+//     }
+//   }
+//   cityData(data);
+//   // setTimeout(() => {
+//   //   cityData(data);
+//   // }, secondsToMilliseconds(5));
+// }
+
 function updateFooter(data) {
   const footerTime = document.querySelector("#footer-time");
   const footerLocation = document.querySelector("#footer-location");
@@ -40,29 +72,20 @@ function updateFooter(data) {
   const footerConditions = document.querySelector("#footer-conditions");
   const footerWind = document.querySelector("#footer-wind");
   const footerFeels = document.querySelector("#footer-feels");
-  let counter = 0;
-  let maxCounter = data.length;
+  const currentDate = new Date();
+  const currentTime = format(currentDate, "h:00aaaaa");
+  const currentHour = currentDate.getHours();
+  const currentMinutes = currentDate.getMinutes();
 
-  function cityData(data) {
-    for (let index = 0; index < maxCounter; index++) {
-      // if (index == maxCounter) {
-      //   index = 0
-      // }
-      const city = data[index];
-      footerTime.textContent = format(city.days[0].datetime, "h:00aaaaa");
-      footerLocation.textContent = city.address;
-      footerTemp.textContent = Math.round(city.days[0].temp);
-      footerConditions.textContent = city.days[0].conditions;
-      footerWind.textContent = city.days[0].winddir;
-      footerWind.textContent += " " + Math.round(city.days[0].windspeed);
-      footerFeels.textContent = Math.round(city.days[0].feelslike);
-      console.log(city);
-    }
-  }
-  cityData(data);
-  // setTimeout(() => {
-  //   cityData(data);
-  // }, secondsToMilliseconds(5));
+  // TODO: round the current time to join to the data's time for footer data
+  console.log("in update footer");
+  footerTime.textContent = format(data.days[0].datetime, "h:00aaaaa");
+  footerLocation.textContent = data.address;
+  footerTemp.textContent = Math.round(data.days[0].temp);
+  footerConditions.textContent = data.days[0].conditions;
+  footerWind.textContent = data.days[0].winddir;
+  footerWind.textContent += " " + Math.round(data.days[0].windspeed);
+  footerFeels.textContent = Math.round(data.days[0].feelslike);
 }
 
 const listeners = (function (params) {
