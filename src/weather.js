@@ -22,19 +22,6 @@ async function getLocalWeather(location) {
     // alert("error in get local weather");
   }
 
-  //   try {
-  //     response = await fetch(
-  //       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${locationInput}?unitGroup=us&key=PDVFP546BCMAPU7PB3QD3GW5Q&contentType=json`,
-  //       { mode: "cors" }
-  //     );
-  //     weather = await response.json();
-  //     console.log(weather);
-  //     loadDailyWeather(weather);
-  //     populateHeader(weather);
-  //   } catch (error) {
-  //     alert("Location not found. Please search again");
-  //   }
-
   function loadDailyWeather(data) {
     for (let index = 0; index <= 4; index++) {
       const dayData = {
@@ -51,22 +38,11 @@ async function getLocalWeather(location) {
       populateDays(dayData);
     }
   }
-  // Populate 5 day forecast
-  // daysData.forEach((element) => {
-  //   populateDays(element);
-  // });
+
   function populateHeader(data) {
     locationFormatted = data.resolvedAddress.split(",", 1)[0];
     updateHeader(data.days[0].datetime, locationFormatted);
   }
-
-  //   getNationalWeather();
-  // Populate header
-  // locationFormatted = weather.resolvedAddress.split(",", 1)[0];
-  // updateHeader(daysData[0].dayDate, locationFormatted);
-  //   }
-
-  // updateFooter()
 }
 
 // async function to pull in data for list of cities
