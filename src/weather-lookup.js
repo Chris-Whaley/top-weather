@@ -55,4 +55,33 @@ const footerCities = [
   "Washington, D.C.",
 ];
 
-export { retrieveIcon, footerCities };
+function convertWindDegreesToCompass(windDirection) {
+  // https://www.campbellsci.com/blog/convert-wind-directions
+  const compassSectors = {
+    1: "N",
+    2: "NNE",
+    3: "NE",
+    4: "ENE",
+    5: "E",
+    6: "ESE",
+    7: "SE",
+    8: "SSE",
+    9: "S",
+    10: "SSW",
+    11: "SW",
+    12: "WSW",
+    13: "W",
+    14: "WNW",
+    15: "NW",
+    16: "NNW",
+    17: "N",
+  };
+
+  let windIndex = windDirection % 360;
+  windIndex = Math.round(windIndex / 22.5) + 1;
+  let compassDir = compassSectors[windIndex];
+
+  return compassDir;
+}
+
+export { retrieveIcon, footerCities, convertWindDegreesToCompass };

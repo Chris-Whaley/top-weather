@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { retrieveIcon } from "./weather-lookup.js";
+import { retrieveIcon, convertWindDegreesToCompass } from "./weather-lookup.js";
 import { getLocalWeather } from "./weather.js";
 
 function populateDays(data) {
@@ -33,59 +33,41 @@ function updateHeader(todaysDateTime, location) {
   todaysDate.textContent = format(todaysDateTime, "LLL M, yyyy");
 }
 
-// function updateFooter(data) {
-//   const footerTime = document.querySelector("#footer-time");
-//   const footerLocation = document.querySelector("#footer-location");
-//   const footerTemp = document.querySelector("#footer-temp");
-//   const footerConditions = document.querySelector("#footer-conditions");
-//   const footerWind = document.querySelector("#footer-wind");
-//   const footerFeels = document.querySelector("#footer-feels");
-//   let counter = 0;
-//   let maxCounter = data.length;
-
-//   function cityData(data) {
-//     for (let index = 0; index < maxCounter; index++) {
-//       // if (index == maxCounter) {
-//       //   index = 0
-//       // }
-//       const city = data[index];
-//       footerTime.textContent = format(city.days[0].datetime, "h:00aaaaa");
-//       footerLocation.textContent = city.address;
-//       footerTemp.textContent = Math.round(city.days[0].temp);
-//       footerConditions.textContent = city.days[0].conditions;
-//       footerWind.textContent = city.days[0].winddir;
-//       footerWind.textContent += " " + Math.round(city.days[0].windspeed);
-//       footerFeels.textContent = Math.round(city.days[0].feelslike);
-//       console.log(city);
-//     }
-//   }
-//   cityData(data);
-//   // setTimeout(() => {
-//   //   cityData(data);
-//   // }, secondsToMilliseconds(5));
-// }
-
 function updateFooter(data) {
   const footerTime = document.querySelector("#footer-time");
   const footerLocation = document.querySelector("#footer-location");
+  const footerIcon = document.querySelector("#footer-icon");
   const footerTemp = document.querySelector("#footer-temp");
   const footerConditions = document.querySelector("#footer-conditions");
   const footerWind = document.querySelector("#footer-wind");
   const footerFeels = document.querySelector("#footer-feels");
   const currentDate = new Date();
-  const currentTime = format(currentDate, "h:00aaaaa");
   const currentHour = currentDate.getHours();
-  const currentMinutes = currentDate.getMinutes();
+  let iconFile;
+
+  // footer shows current hour's data
+  const currentHourlyData = data.hours[currentHour];
 
   // TODO: round the current time to join to the data's time for footer data
-  console.log("in update footer");
-  footerTime.textContent = format(data.days[0].datetime, "h:00aaaaa");
-  footerLocation.textContent = data.address;
-  footerTemp.textContent = Math.round(data.days[0].temp);
-  footerConditions.textContent = data.days[0].conditions;
-  footerWind.textContent = data.days[0].winddir;
-  footerWind.textContent += " " + Math.round(data.days[0].windspeed);
-  footerFeels.textContent = Math.round(data.days[0].feelslike);
+  const formattedTimeString = getDateFromHours(currentHourlyData.datetime);
+
+  footerTime.textContent = format(formattedTimeString, "h:00aaaaa");
+  footerLocation.textContent = data.location;
+  iconFile = retrieveIcon(data.icon);
+  footerIcon.src = iconFile;
+  footerTemp.textContent = Math.round(currentHourlyData.temp);
+  footerConditions.textContent = currentHourlyData.conditions;
+  footerWind.textContent = convertWindDegreesToCompass(
+    currentHourlyData.winddir
+  );
+  footerWind.textContent += " " + Math.round(currentHourlyData.windspeed);
+  footerFeels.textContent += " " + Math.round(currentHourlyData.feelslike);
+
+  function getDateFromHours(time) {
+    time = time.split(":");
+    let now = new Date();
+    return now.setHours(time[0], time[1], 0, 0);
+  }
 }
 
 const listeners = (function (params) {

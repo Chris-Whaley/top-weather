@@ -22,6 +22,7 @@ async function getLocalWeather(location) {
   } catch (error) {
     // alert("error in get local weather");
     console.error(error);
+    console.log(error);
   }
 
   function loadDailyWeather(data) {
@@ -42,15 +43,18 @@ async function getLocalWeather(location) {
   }
 
   function populateHeader(data) {
-    locationFormatted = data.resolvedAddress.split(",", 1)[0];
-    updateHeader(data.days[0].datetime, locationFormatted);
+    const headerLocationFormatted = data.resolvedAddress.split(",", 1)[0];
+    updateHeader(data.days[0].datetime, headerLocationFormatted);
   }
 
   function populateFooter(data) {
-    locationFormatted = data.resolvedAddress.split(",", 2)[0];
-    console.log(locationFormatted);
-    console.log(data.days[0]);
-    updateFooter(data.days[0].datetime, locationFormatted);
+    const footerLocationFormatted =
+      data.resolvedAddress.split(",")[0] +
+      "," +
+      data.resolvedAddress.split(",")[1];
+    let footerData = data.days[0];
+    footerData.location = footerLocationFormatted;
+    updateFooter(footerData);
   }
 }
 
