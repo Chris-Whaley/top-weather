@@ -9,7 +9,7 @@ async function getLocalWeather(location) {
   let weather;
 
   if (location === null || location === undefined) {
-    locationInput = "Ipswich ma";
+    locationInput = "Boston MA";
   } else {
     locationInput = location;
   }
